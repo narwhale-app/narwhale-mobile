@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
@@ -5,6 +6,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:narwhale_mobile/app/modules/400_qrcode/qrCodeParseResult/controllers/qr_code_parse_result_controller.dart';
+import 'package:narwhale_mobile/utils.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:narwhale_mobile/app/models/TransactionsModels.dart';
 import 'package:narwhale_mobile/app/modules/100_auth/104_onboarding/controllers/onboarding_controller.dart';
@@ -302,27 +305,48 @@ class QRCodeScannerState extends State<QRCodeScanner> {
 
   Future<void> onFound(BuildContext context) async {
     QRCodeScannerResult qrCodeScannerResult = _qrCodeScannerStatus.result!;
+    if (qrCodeScannerResult.qrCodeType == QRCodeScannerTypes.PARSE_TRANSACTION) {
+      await redirectToViewPage(qrCodeScannerResult);
+      return;
+    }
+
     await CServices.notify.addDialog(context, child: QRCodeView(
-        qrCodeScannerResult: qrCodeScannerResult,
-        onProcess: () {
-          switch(qrCodeScannerResult.qrCodeType) {
-            case QRCodeScannerTypes.UNKNOWN:
-              break;
-            case QRCodeScannerTypes.ADD_WALLET_SIMPLE:
-              QRCodeScannerResultAddWalletSimple qrCode = qrCodeScannerResult as QRCodeScannerResultAddWalletSimple;
-              processAddWalletSimple(context, qrCode);
-              break;
-            case QRCodeScannerTypes.ADD_WALLET_JSON:
-              QRCodeScannerResultAddWalletJSON qrCode = qrCodeScannerResult as QRCodeScannerResultAddWalletJSON;
-              processAddWalletJSON(context, qrCode);
-              break;
-            case QRCodeScannerTypes.PARSE_TRANSACTION:
-              QRCodeScannerResultParseTransaction qrCode = qrCodeScannerResult as QRCodeScannerResultParseTransaction;
-              processParseTransaction(context, qrCode);
-              break;
-          }
-        }
+      qrCodeScannerResult: qrCodeScannerResult,
+      onProcess: () {
+        processScannerResult(qrCodeScannerResult);
+      }
     ));
+  }
+
+  Future<void> redirectToViewPage(QRCodeScannerResult qrCodeScannerResult) {
+    Completer<void> completer = Completer();
+    Get.toNamed(Routes.QR_CODE_PARSE_RESULT, arguments: QRCodeParseResultArguments(
+      qrCodeScannerResult: qrCodeScannerResult,
+      completer: completer,
+      onProcess: () {
+        processScannerResult(qrCodeScannerResult);
+      }
+    ));
+    return completer.future;
+  }
+
+  void processScannerResult(QRCodeScannerResult qrCodeScannerResult) {
+    switch(qrCodeScannerResult.qrCodeType) {
+      case QRCodeScannerTypes.UNKNOWN:
+        break;
+      case QRCodeScannerTypes.ADD_WALLET_SIMPLE:
+        QRCodeScannerResultAddWalletSimple qrCode = qrCodeScannerResult as QRCodeScannerResultAddWalletSimple;
+        processAddWalletSimple(context, qrCode);
+        break;
+      case QRCodeScannerTypes.ADD_WALLET_JSON:
+        QRCodeScannerResultAddWalletJSON qrCode = qrCodeScannerResult as QRCodeScannerResultAddWalletJSON;
+        processAddWalletJSON(context, qrCode);
+        break;
+      case QRCodeScannerTypes.PARSE_TRANSACTION:
+        QRCodeScannerResultParseTransaction qrCode = qrCodeScannerResult as QRCodeScannerResultParseTransaction;
+        processParseTransaction(context, qrCode);
+        break;
+    }
   }
 
   void processAddWalletSimple(BuildContext context, QRCodeScannerResultAddWalletSimple qrCode) async {

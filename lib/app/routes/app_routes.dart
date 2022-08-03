@@ -26,6 +26,7 @@ abstract class Routes {
   static const OPTIONS_MASTER_PUBLIC_KEY_SELECT_TYPE =
       _Paths.OPTIONS_MASTER_PUBLIC_KEY_SELECT_TYPE;
   static const EXPANDED_QR_CODE = _Paths.EXPANDED_QR_CODE;
+  static const QR_CODE_PARSE_RESULT = _Paths.QR_CODE_PARSE_RESULT;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const OPTIONS_MASTER_PUBLIC_KEY_SELECT_TYPE =
       '/options-master-public-key-select-type';
   static const EXPANDED_QR_CODE = '/expanded-qr-code';
+  static const QR_CODE_PARSE_RESULT = '/qr-code-parse-result';
 }

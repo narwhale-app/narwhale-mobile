@@ -30,14 +30,16 @@ import '../modules/200_wallets/walletInfoTransaction/bindings/wallet_info_transa
 import '../modules/200_wallets/walletInfoTransaction/views/wallet_info_transactions_view.dart';
 import '../modules/200_wallets/wallets/bindings/wallets_binding.dart';
 import '../modules/200_wallets/wallets/views/wallets_view.dart';
+import '../modules/300_options/expandedQRCode/bindings/expanded_qr_code_binding.dart';
+import '../modules/300_options/expandedQRCode/views/expanded_qr_code_view.dart';
 import '../modules/300_options/optionsMasterPublicKey/bindings/options_master_public_key_binding.dart';
 import '../modules/300_options/optionsMasterPublicKey/views/options_master_public_key_view.dart';
 import '../modules/300_options/optionsMasterPublicKeySelectType/bindings/options_master_public_key_select_type_binding.dart';
 import '../modules/300_options/optionsMasterPublicKeySelectType/views/options_master_public_key_select_type_view.dart';
 import '../modules/300_options/viewPublicKey/bindings/options_view_public_key_binding.dart';
 import '../modules/300_options/viewPublicKey/views/options_view_public_key_view.dart';
-import '../modules/300_options/expandedQRCode/bindings/expanded_qr_code_binding.dart';
-import '../modules/300_options/expandedQRCode/views/expanded_qr_code_view.dart';
+import '../modules/400_qrcode/qrCodeParseResult/bindings/qr_code_parse_result_binding.dart';
+import '../modules/400_qrcode/qrCodeParseResult/views/qr_code_parse_result_view.dart';
 
 part 'app_routes.dart';
 
@@ -141,6 +143,11 @@ class AppPages {
       name: _Paths.EXPANDED_QR_CODE,
       page: () => ExpandedQRCodeView(),
       binding: ExpandedQRCodeBinding(),
+    ),
+    GetPage(
+      name: _Paths.QR_CODE_PARSE_RESULT,
+      page: () => QRCodeParseResultView(),
+      binding: QRCodeParseResultBinding(),
     ),
   ];
 }

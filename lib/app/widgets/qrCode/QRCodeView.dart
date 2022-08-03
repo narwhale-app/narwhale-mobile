@@ -95,69 +95,8 @@ class QRCodeView extends StatelessWidget {
           )
         );
       case QRCodeScannerTypes.PARSE_TRANSACTION:
-        QRCodeScannerResultParseTransaction qrCode = qrCodeScannerResult as QRCodeScannerResultParseTransaction;
-        SCryptoTransactionModel transaction = qrCode.preprocessData as SCryptoTransactionModel;
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Transaction', style: TextStyle(fontWeight: FontWeight.bold)),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: getTransactionArea(transaction)
-            )/*,
-            Container(
-              child: Text(transaction.toString())
-            )*/
-          ]
-        );
+        return Text('Unknown');
     }
-  }
-
-  Widget getTransactionArea(SCryptoTransactionModel transaction) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Fee: ' + transaction.fee.toString()),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          child: Text('Inputs', style: TextStyle(fontWeight: FontWeight.bold))
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 3),
-          child: getTransactionPointsArea(transaction.inputs),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          child: Text('Outputs', style: TextStyle(fontWeight: FontWeight.bold))
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 3),
-          child: getTransactionPointsArea(transaction.outputs),
-        )
-      ]
-    );
-  }
-
-  Widget getTransactionPointsArea(List<SCryptoTransactionPoint> points) {
-    List<Widget> rows = [];
-    points.forEach((point) {
-      String walletName = '';
-      if (point.walletKey.isNotEmpty) {
-        SWalletModel walletItem = CServices.crypto.controlWalletsService.getWalletByKey(point.walletKey);
-        walletName = walletItem.name;
-      }
-
-      rows.add(Container(
-        child: Text(walletName + ' -> ' + point.value.toString())
-      ));
-    });
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: rows
-    );
   }
 
   Widget getStatusLabel(String title, String info) {

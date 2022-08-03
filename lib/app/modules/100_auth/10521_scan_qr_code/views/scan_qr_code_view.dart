@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:narwhale_mobile/app/widgets/qrCode/QRCodeScanner.dart';
-import 'package:narwhale_mobile/app/widgets/qrCode/QRCodeView.dart';
 import 'package:narwhale_mobile/app/widgets/slidingUpPanel/SlidingUpPanelController.dart';
 import 'package:narwhale_mobile/app/widgets/slidingUpPanel/SlidingUpPanelView.dart';
-import 'package:narwhale_mobile/services/CServices.dart';
 
-import '../../../../../utils.dart';
 import '../controllers/scan_qr_code_controller.dart';
 
 class ScanQRCodeView extends GetView<ScanQRCodeController> {
