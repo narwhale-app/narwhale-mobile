@@ -1,0 +1,96 @@
+name: narwhale_mobile
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.15.0 <3.0.0'
+
+dependencies:
+  flutter: 
+    sdk: flutter
+  narwhale_rust: 
+    path: ./narwhale_rust
+
+  get: 4.3.8
+  cupertino_icons: ^1.0.3
+  flutter_svg: ^0.22.0
+  qr_flutter: ^4.0.0
+  flutter_launcher_icons: ^0.9.2
+  table_calendar: ^3.0.3
+  qr_code_scanner: ^0.6.1
+  sqflite: ^2.0.0+4
+  shared_preferences: ^2.0.7
+  encrypt: ^5.0.1
+  crypto: ^3.0.1
+  camera: 0.9.4+5
+  permission_handler: ^8.3.0
+  sliding_up_panel: ^2.0.0+1
+  hex: ^0.2.0
+
+  biometric_storage:
+    path: ./external/biometric_storage
+  path_provider: ^2.0.10
+
+dev_dependencies: 
+  flutter_test: 
+    sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/appicon/appicon-x512.png"
+  remove_alpha_ios: true
+
+flutter: 
+  uses-material-design: true
+
+  assets:
+    - assets/icons/face_id.svg
+    - assets/icons/fingerprint.svg
+    - assets/icons/delete.svg
+    - assets/icons/vpn_key.svg
+    - assets/icons/account_balance_wallet.svg
+    - assets/icons/qr_code_scanner.svg
+    - assets/icons/qr_code_scanner_2.svg
+    - assets/icons/coolicon.svg
+    - assets/icons/bitcoin.svg
+    - assets/icons/account_tree.svg
+    - assets/icons/top_right_icon.svg
+    - assets/icons/edit.svg
+    - assets/icons/content_copy.svg
+    - assets/icons/globe_1.svg
+    - assets/icons/chevron_right.svg
+    - assets/icons/arrow-upload.svg
+    - assets/icons/arrow-download.svg
+    - assets/icons/business-calendar.svg
+    - assets/icons/menu_pencil.svg
+    - assets/icons/menu_qr_code.svg
+    - assets/icons/menu_public_key.svg
+    - assets/icons/menu_json.svg
+    - assets/icons/menu_pdf.svg
+    - assets/icons/menu_delete.svg
+    - assets/icons/folder_open.svg
+    - assets/icons/take_photo.svg
+    - assets/icons/keyboard/shift.svg
+    - assets/icons/keyboard/backspace.svg
+    - assets/stickers/key-x512.png
+    - assets/stickers/bitcoin-1.png
+    - assets/stickers/bitcoin-2.png
+    - assets/stickers/bitcoin-3.png
+    - assets/stickers/narwhale_main.png
+    - assets/stickers/narwhale_wonder.png
+    - assets/stickers/narwhale_happy.png
+    - assets/stickers/narwhale_normal.png
+    - assets/stickers/narwhale_susp.png
+    - assets/bip-0039/english.txt
+
+  fonts:
+    - family: Mulish
+      fonts:
+        - asset: assets/fonts/Mulish/static/Mulish-Regular.ttf
+        - asset: assets/fonts/Mulish/static/Mulish-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Mulish/static/Mulish-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Mulish/static/Mulish-Bold.ttf
+          weight: 700

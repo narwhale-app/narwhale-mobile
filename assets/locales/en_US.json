@@ -1,0 +1,63 @@
+{
+  "verification": {
+  	"labels": {
+  		"top_title": "Welcome! Please chose your PIN-code",
+  		"top_title_ready": "Welcome! Please enter your PIN-code",
+  		"remember_these_words": "Remember these words. They will stay the same on this device unless it has been tampered."
+  	}
+  },
+  "recovery_select": {
+  	"labels": {
+  		"top_title": "Would you like to generate new wallet seed?",
+  		"middle_help": "Generating a new random seed allows creating an infinite number of wallets. All these wallets will be entirely determined by the seed phrase that must be kept highly secret. \n\nPlease backup the seed phrase in a safe place to regain control over your assets if this device is damaged or lost."
+  	},
+  	"buttons": {
+  		"generate_new_seed": "YES, GENERATE NEW SEED",
+  		"recovery_phrase": "USE RECOVERY PHRASE"
+  	}
+  },
+  "add_wallet": {
+    "labels": {
+      "top_title": "Add a wallet",
+      "middle_help": "To use the application, you need to create a new wallet or import an existing one. Please choose what you will do next:"
+    },
+    "buttons": {
+      "create_wallet": "Create new wallet",
+      "import_wallet": "Import existing wallet"
+    }
+  },
+  "generate_seed": {
+    "labels": {
+      "top_title": "Your recovery phrase",
+      "recovery_warning": "Write it down and never show to anybody!",
+      "complexity_suggest": "Use 24 words",
+      "complexity_description": "Generates a 24-word seed phrase containing 256 bits of entropy instead of 128 in a 12-word variant.",
+      "entropy_suggest": "Use camera entropy source",
+      "entropy_description": "Generates entropy based on camera data"
+    },
+    "buttons": {
+      "prev_page": "BACK",
+      "next_page": "DONE"
+    }
+  },
+  "onboarding": {
+  	"labels": {
+  		"top_title": "Yayy!!!",
+  		"recovery_set_up_success": "Recovery phrase set up successfully.",
+      "wallet_ready": "Your wallet is ready to use."
+  	},
+  	"buttons": {
+  		"next_page": "OK"
+  	}
+  },
+  "wallet_info_address": {
+  	"labels": {
+  		"qrcode_title": "Address",
+  		"details_title": "Address",
+  		"descriptor_title": "Address descriptor"
+  	},
+  	"buttons": {
+  		"details_copy": "Copy"
+  	}
+  }
+}
