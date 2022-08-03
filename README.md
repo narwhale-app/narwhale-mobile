@@ -2,7 +2,7 @@
 
 **POC Mobile wallet / co-signer app built with Flutter and Rust**
 
-<img src="/docs/media/media1.png" width="256">
+<img src="/docs/media/media1x512.png" width="256">
 
 ## Pre-requisites
 
