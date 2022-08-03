@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:narwhale_mobile/app/models/CryptoContainerModel.dart';
 import 'package:narwhale_mobile/app/models/TransactionsModels.dart';
@@ -5,6 +6,7 @@ import 'package:narwhale_mobile/app/modules/400_qrcode/qrCodeParseResult/control
 import 'package:narwhale_mobile/app/widgets/LightButton.dart';
 import 'package:narwhale_mobile/app/widgets/qrCode/QRCodeScanner.dart';
 import 'package:narwhale_mobile/services/CServices.dart';
+import 'package:narwhale_mobile/utils.dart';
 
 class QRCodeParseResultTransaction extends StatelessWidget {
   final QRCodeParseResultController controller;
@@ -38,31 +40,69 @@ class QRCodeParseResultTransaction extends StatelessWidget {
   Widget getContent(BuildContext context) {
     SCryptoTransactionModel transaction = qrCode.preprocessData as SCryptoTransactionModel;
 
+
+
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Transaction fee: ' + transaction.fee.toString()),
         Container(
-          margin: EdgeInsets.only(top: 10),
-          child: Text('Inputs', style: TextStyle(fontWeight: FontWeight.bold))
+          child: getItemArea('Sending: ', Utils.formatBTC(transaction.getSendingAmount())),
         ),
         Container(
-          margin: EdgeInsets.only(top: 3),
-          child: getTransactionPointsArea(transaction.inputs),
+          margin: EdgeInsets.only(top: 5),
+          child: getItemArea('From wallet: ', getSendingWalletName(transaction)),
+        ),
+
+        /*Container(
+          margin: EdgeInsets.only(top: 20),
+          child: Text('From', style: TextStyle(fontWeight: FontWeight.bold))
         ),
         Container(
-          margin: EdgeInsets.only(top: 10),
-          child: Text('Outputs', style: TextStyle(fontWeight: FontWeight.bold))
+          margin: EdgeInsets.only(top: 20),
+          child: getTransactionPointsArea(transaction),
+        ),*/
+
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          child: Text('To', style: TextStyle(fontWeight: FontWeight.bold))
         ),
         Container(
-          margin: EdgeInsets.only(top: 3),
-          child: getTransactionPointsArea(transaction.outputs),
+          margin: EdgeInsets.only(top: 20),
+          child: getTransactionPointsArea(transaction, outPoints: true),
+        ),
+
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          child: getItemArea('Transaction fee: ', Utils.formatBTC(transaction.fee)),
         ),
         Container(
-          margin: EdgeInsets.only(top: 3),
-          child: getTransactionPointsArea(transaction.outputs),
+          margin: EdgeInsets.only(top: 5),
+          child: getItemArea('The total withdrawal: ', Utils.formatBTC(transaction.getTotalWithdrawal())),
+        )
+      ]
+    );
+  }
+
+  String getSendingWalletName(SCryptoTransactionModel transaction) {
+    try {
+      SWalletModel walletItem = CServices.crypto.controlWalletsService.getWalletByKey(transaction.getSendingWalletKey());
+      return walletItem.name;
+    } catch(e) {
+      return '?';
+    }
+  }
+
+  Widget getItemArea(String title, String value) {
+    return Row(
+      children: [
+        Container(
+          margin: EdgeInsets.only(right: 10),
+          child: Text(title, style: TextStyle(fontWeight: FontWeight.bold))
+        ),
+        Container(
+          child: Text(value, style: TextStyle(color: Color(0xFFC0CAD7)))
         )
       ]
     );
@@ -104,23 +144,55 @@ class QRCodeParseResultTransaction extends StatelessWidget {
     ));
   }
 
-  Widget getTransactionPointsArea(List<SCryptoTransactionPoint> points) {
+  Widget getTransactionPointsArea(SCryptoTransactionModel transaction, {bool outPoints = false}) {
+    List<SCryptoTransactionPoint> points = outPoints?transaction.getOutPoints():transaction.getInPoints();
+
     List<Widget> rows = [];
     points.forEach((point) {
-      String walletName = '?';
-      if (point.walletKey.isNotEmpty) {
-        SWalletModel walletItem = CServices.crypto.controlWalletsService.getWalletByKey(point.walletKey);
-        walletName = walletItem.name;
-      }
-
       rows.add(Container(
-        child: Text(walletName + ' -> ' + point.value.toString())
+        margin: EdgeInsets.only(top: rows.isEmpty?0:15),
+        child: getTransactionPointItem(point)
       ));
     });
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: rows
+    );
+  }
+
+  Widget getTransactionPointItem(SCryptoTransactionPoint point) {
+    String walletName = '?';
+    if (point.walletKey.isNotEmpty) {
+      SWalletModel walletItem = CServices.crypto.controlWalletsService.getWalletByKey(point.walletKey);
+      walletName = walletItem.name;
+    }
+
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Color(0xFF202A40),
+        borderRadius: BorderRadius.all(Radius.circular(10))
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: getItemArea('Sending:', Utils.formatBTC(point.value))
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                child: getItemArea('To:', point.address)
+              )
+            ]
+          )
+        )
+      )
     );
   }
 }

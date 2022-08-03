@@ -1,4 +1,5 @@
 
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
@@ -119,5 +120,52 @@ class SCryptoTransactionModel {
   @override
   String toString() {
     return jsonEncode(toJSON());
+  }
+
+  double? sendingAmount;
+  double getSendingAmount() {
+    if (sendingAmount != null) {
+      return sendingAmount!;
+    }
+    Map<String, bool> inputWallets = HashMap();
+    inputs.forEach((el) {
+      inputWallets[el.walletKey] = true;
+    });
+    double amount = 0;
+    outputs.forEach((el) {
+      if (inputWallets.containsKey(el.walletKey)) {
+        return;
+      }
+      amount += el.value;
+    });
+    sendingAmount = amount;
+    return amount;
+  }
+
+  double getTotalWithdrawal() {
+    return getSendingAmount() + fee;
+  }
+
+  String getSendingWalletKey() {
+    return inputs.first.walletKey;
+  }
+
+  List<SCryptoTransactionPoint> getInPoints() {
+    return inputs;
+  }
+
+  List<SCryptoTransactionPoint> getOutPoints() {
+    List<SCryptoTransactionPoint> list = [];
+    Map<String, bool> inputWallets = HashMap();
+    inputs.forEach((el) {
+     // inputWallets[el.walletKey] = true;
+    });
+    outputs.forEach((el) {
+      if (inputWallets.containsKey(el.walletKey)) {
+        return;
+      }
+      list.add(el);
+    });
+    return list;
   }
 }
