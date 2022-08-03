@@ -1,4 +1,4 @@
-# Narwhale-Mobile (WIP)
+# Narwhale
 
 **POC Mobile wallet / co-signer app built with Flutter and Rust**
 
