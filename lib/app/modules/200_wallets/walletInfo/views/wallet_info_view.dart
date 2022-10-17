@@ -71,7 +71,7 @@ class WalletInfoView extends GetView<WalletInfoController> {
               TopSide(
                   title: controller.walletItem!.name,
                   titleType: TOP_SIDE_TITLE_TYPE.WALLET,
-                  menuType: TOP_SIDE_MENU_TYPE.OPTIONS,
+                  menuType: TOP_SIDE_MENU_TYPE.NONE,
                   openMenu: () {
                     _slidingUpPanelController.open(getSlideMenu());
                   }
@@ -95,7 +95,7 @@ class WalletInfoView extends GetView<WalletInfoController> {
             child: LightTab(
               tabs: [
                 LightTabNode('Information', key: WALLET_INFO_TAB.DETAILS.toString()),
-                LightTabNode('Addresses', key: WALLET_INFO_TAB.ADDRESSES.toString()),
+                //LightTabNode('Addresses', key: WALLET_INFO_TAB.ADDRESSES.toString()),
                 LightTabNode('Transactions', key: WALLET_INFO_TAB.TRANSACTIONS.toString())
               ],
               tabKey: controller.currentTab.toString(),

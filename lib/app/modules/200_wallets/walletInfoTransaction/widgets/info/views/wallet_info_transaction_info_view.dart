@@ -24,12 +24,12 @@ class WalletInfoTransactionInfoView extends GetView<WalletInfoTransactionInfoCon
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        /*Container(
           padding: EdgeInsets.only(top: 20, left: 15, right: 15),
           child: getTopTitle()
-        ),
+        ),*/
         Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: EdgeInsets.only(top: 0),
           padding: EdgeInsets.only(left: 15, right: 15),
           child: getAddressPanel(context)
         ),
@@ -71,11 +71,11 @@ class WalletInfoTransactionInfoView extends GetView<WalletInfoTransactionInfoCon
   Widget getAddressPanel(BuildContext context) {
     return Column(
       children: [
-        Text(_controller.transactionID),
-        Container(
+        //Text(_controller.transactionID),
+        /*Container(
           margin: EdgeInsets.only(top: 20),
           child: getCopyAddress(context)
-        ),
+        ),*/
         Container(
           margin: EdgeInsets.only(top: 20),
           child: getSignTransaction(context)

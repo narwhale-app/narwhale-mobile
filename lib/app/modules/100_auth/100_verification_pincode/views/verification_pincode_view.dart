@@ -57,7 +57,7 @@ class VerificationPinCodeView extends GetView<VerificationPinCodeController> {
                 style: TextStyle(fontSize: 16, color: Theme.of(context).hintColor)
               ),
             ),
-            Container(
+            /*Container(
               width: double.infinity,
               margin: EdgeInsets.only(top: 16),
               child: Text(
@@ -65,7 +65,7 @@ class VerificationPinCodeView extends GetView<VerificationPinCodeController> {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).accentColor),
               ),
-            ),
+            ),*/
             Container(
               width: double.infinity,
               margin: EdgeInsets.only(top: 20),

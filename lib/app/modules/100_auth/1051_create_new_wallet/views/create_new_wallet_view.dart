@@ -131,7 +131,7 @@ class CreateNewWalletView extends GetView<CreateNewWalletController> {
           ),
           Container(
             margin: EdgeInsets.only(top: 20),
-            child: Text('Create Native Seqwit wallet.')
+            child: Text('Create Native Segwit wallet.')
           )
         ]
       );
@@ -154,7 +154,7 @@ class CreateNewWalletView extends GetView<CreateNewWalletController> {
                 controller.createWallet(context);
               },
               child: Text(
-                  'Native Seqwit'.tr,
+                  'Native Segwit'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Theme.of(context).accentColor)
               )
@@ -172,7 +172,7 @@ class CreateNewWalletView extends GetView<CreateNewWalletController> {
               controller.createWallet(context);
             },
             child: Text(
-              'Nested Seqwit'.tr,
+              'Nested Segwit'.tr,
               textAlign: TextAlign.center,
               style: TextStyle(color: Theme.of(context).accentColor)
             )
